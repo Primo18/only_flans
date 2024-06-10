@@ -1,0 +1,33 @@
+{% extends 'web/base.html' %}
+
+{% block title %}{{ flan.name }} - Only Flans{% endblock %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card h-100 shadow-lg card-hover card-semitransparent d-flex flex-column">
+        <div class="image-container">
+            <img src="{% static flan.image_url %}" class="card-img-top" alt="{{ flan.name }}">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ flan.name }}</h5>
+            <p class="card-text">{{ flan.description }}</p>
+            <div class="d-flex justify-content-between mt-4">
+                <form method="POST" action="{% url 'toggle_privacy' slug=flan.slug %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">
+                        {% if flan.is_private %}
+                        Quitar de privados
+                        {% else %}
+                        Hacer privado
+                        {% endif %}
+                    </button>
+                </form>
+                <form method="POST" action="{% url 'buy_flan' slug=flan.slug %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn ">Comprar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

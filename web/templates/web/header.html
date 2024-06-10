@@ -1,5 +1,5 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+<nav class="navbar fixed-top navbar-expand-lg border-bottom border-body bg navbar-semitransparent">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index' %}">
             <img src="{% static 'web/images/1.webp' %}" alt="Only Flans" class="img-fluid" width="150">
@@ -9,28 +9,58 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav-tabs me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+            <ul
+                class="navbar-nav nav-underline d-flex flex-row justify-content-evenly align-items-center me-auto mb-2 mb-lg-0">
+                <li class="nav-item mt-3 mt-lg-0 text-center">
                     <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page"
-                        href="{% url 'index' %}">Home</a>
+                        href="{% url 'index' %}">
+                        <i class="bi bi-house d-inline d-lg-none"></i>
+                        <span class="d-block d-lg-none">Home</span>
+                        <span class="d-none d-lg-inline">Home</span>
+                    </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mt-3 mt-lg-0 text-center">
                     <a class="nav-link {% if request.path == '/welcome/' %}active{% endif %}"
-                        href="{% url 'welcome' %}">Bienvenido</a>
+                        href="{% url 'welcome' %}">
+                        <i class="bi bi-person-circle d-inline d-lg-none"></i>
+                        <span class="d-block d-lg-none">Bienvenido</span>
+                        <span class="d-none d-lg-inline">Bienvenido</span>
+                    </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mt-3 mt-lg-0 text-center">
                     <a class="nav-link {% if request.path == '/contact/' %}active{% endif %}"
-                        href="{% url 'contact' %}">Contacto</a>
+                        href="{% url 'contact' %}">
+                        <i class="bi bi-info-circle d-inline d-lg-none"></i>
+                        <span class="d-block d-lg-none">Contacto</span>
+                        <span class="d-none d-lg-inline">Contacto</span>
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if request.path == '/about/' %}active{% endif %}"
-                        href="{% url 'about' %}">Acerca</a>
+                <li class="nav-item mt-3 mt-lg-0 text-center">
+                    <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'about' %}">
+                        <i class="bi bi-file-earmark-person d-inline d-lg-none"></i>
+                        <span class="d-block d-lg-none">Acerca</span>
+                        <span class="d-none d-lg-inline">Acerca</span>
+                    </a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar Flan" aria-label="Search">
-                <button class="btn btn-outline-primary" type="submit">Buscar</button>
-            </form>
+            <div class="d-flex align-items-center mt-3 mt-lg-0 justify-content-between">
+                <form class="d-flex me-2" role="search" action="{% url 'search' %}" method="get">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Buscar Flan"
+                        aria-label="Search" value="{{ request.GET.q }}">
+                    <button class="btn  d-none d-lg-inline" type="submit">Buscar</button>
+                    <button class="btn  d-inline d-lg-none" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+                <div class="dropdown">
+                    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                        data-bs-auto-close="outside">
+                        <span class="d-none d-lg-inline">Iniciar Sesión</span>
+                        <i class="bi bi-box-arrow-in-right d-inline d-lg-none"></i>
+                    </button>
+                    {% include 'web/login.html' %}
+                </div>
+            </div>
         </div>
     </div>
 </nav>

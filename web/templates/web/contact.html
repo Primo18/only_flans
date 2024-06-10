@@ -1,8 +1,37 @@
 {% extends 'web/base.html' %}
 
+{% load widget_tweaks %}
+
 {% block title %}Contact Us - Only Flans{% endblock %}
 
 {% block content %}
-<h1>Contáctanos</h1>
-<p>Como contactar a Only Flans.</p>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="card p-4 shadow-lg" style="width: 100%; max-width: 600px; background-color: rgba(0, 0, 0, 0.6);">
+        <h1 class="text-center">Contáctanos</h1>
+        <p class="text-center">Como contactar a Only Flans.</p>
+
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="mb-3">
+                <label for="customer_name" class="form-label">Nombre</label>
+                {{ form.customer_name.errors }}
+                {{ form.customer_name|add_class:"form-control" }}
+            </div>
+            <div class="mb-3">
+                <label for="customer_email" class="form-label">Correo Electrónico</label>
+                {{ form.customer_email.errors }}
+                {{ form.customer_email|add_class:"form-control" }}
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Mensaje</label>
+                {{ form.message.errors }}
+                {{ form.message|add_class:"form-control" }}
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
