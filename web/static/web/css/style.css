@@ -53,11 +53,12 @@ footer {
 
 .btn {
     color: var(--color-chocolate-oscuro);
-    /* background-color: var(--color-flan-dorado-oscuro); */
     border-color: var(--color-flan-dorado-oscuro);
 }
 
-
+.btn:hover {
+    background-color: var(--color-caramelo-oscuro);
+}
 
 
 .navbar .nav-link {
@@ -73,15 +74,7 @@ footer {
     color: var(--color-chocolate-oscuro);
 }
 
-.btn-primary {
-    background-color: var(--color-chocolate-oscuro);
-    border-color: var(--color-caramelo-oscuro);
-}
 
-.btn-primary:hover {
-    background-color: var(--color-chocolate-oscuro);
-    border-color: var(--color-chocolate-oscuro);
-}
 
 .dropdown-menu {
     background: linear-gradient(to bottom right, rgba(37, 37, 37, 1), rgba(25, 25, 25, 1));

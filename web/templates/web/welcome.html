@@ -3,7 +3,7 @@
 {% block title %}Home - Only Flans{% endblock %}
 {% load static %}
 {% block content %}
-<h1>¡Bienvenido a Only Flans!</h1>
+<h1>¡Bienvenido {{ user.get_username }}!</h1>
 <div class="row">
     {% for flan in flanes %}
     <div class="col-md-4 mb-4">

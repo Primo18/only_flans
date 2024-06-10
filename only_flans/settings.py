@@ -75,6 +75,11 @@ TEMPLATES = [
     },
 ]
 
+# Configuración de autenticación
+LOGIN_REDIRECT_URL = "/welcome/"
+LOGOUT_REDIRECT_URL = "/"
+
+
 WSGI_APPLICATION = "only_flans.wsgi.application"
 
 

@@ -1,20 +1,37 @@
-<form class="dropdown-menu bg-black.bg-gradient dropdown-menu-end p-4 login"
-    style="background-color: rgba(0, 0, 0, 0.6);">
-    <div class="mb-3">
-        <label for="email" class="form-label">Correo electrónico</label>
-        <input type="email" class="form-control" id="email" placeholder="email@example.com">
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password" placeholder="Contraseña">
-    </div>
-    <div class="mb-3">
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-            <label class="form-check-label" for="dropdownCheck2">
-                Recuérdame
-            </label>
+{% extends 'web/base.html' %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card" style="background-color: rgba(0, 0, 0, 0.6);">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Iniciar Sesión</h2>
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nombre de usuario</label>
+                            <input type="text" class="form-control" name="username" placeholder="Nombre de usuario"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" name="password" placeholder="Contraseña"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
+                                <label class="form-check-label" for="remember_me">Recuérdame</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn w-100">Iniciar Sesión</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    <button type="submit" class="btn">Iniciar Sesión</button>
-</form>
+</div>
+{% endblock %}

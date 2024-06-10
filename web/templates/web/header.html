@@ -1,3 +1,4 @@
+<!-- header.html -->
 {% load static %}
 <nav class="navbar fixed-top navbar-expand-lg border-bottom border-body bg navbar-semitransparent">
     <div class="container-fluid">
@@ -19,6 +20,7 @@
                         <span class="d-none d-lg-inline">Home</span>
                     </a>
                 </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item mt-3 mt-lg-0 text-center">
                     <a class="nav-link {% if request.path == '/welcome/' %}active{% endif %}"
                         href="{% url 'welcome' %}">
@@ -27,6 +29,7 @@
                         <span class="d-none d-lg-inline">Bienvenido</span>
                     </a>
                 </li>
+                {% endif %}
                 <li class="nav-item mt-3 mt-lg-0 text-center">
                     <a class="nav-link {% if request.path == '/contact/' %}active{% endif %}"
                         href="{% url 'contact' %}">
@@ -43,22 +46,53 @@
                     </a>
                 </li>
             </ul>
-            <div class="d-flex align-items-center mt-3 mt-lg-0 justify-content-between">
-                <form class="d-flex me-2" role="search" action="{% url 'search' %}" method="get">
-                    <input class="form-control me-2" type="search" name="q" placeholder="Buscar Flan"
-                        aria-label="Search" value="{{ request.GET.q }}">
-                    <button class="btn  d-none d-lg-inline" type="submit">Buscar</button>
-                    <button class="btn  d-inline d-lg-none" type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </form>
-                <div class="dropdown">
-                    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-                        data-bs-auto-close="outside">
-                        <span class="d-none d-lg-inline">Iniciar Sesión</span>
-                        <i class="bi bi-box-arrow-in-right d-inline d-lg-none"></i>
-                    </button>
-                    {% include 'web/login.html' %}
+            <form class="d-flex me-2" role="search" action="{% url 'search' %}" method="get">
+                <input class="form-control me-2" type="search" name="q" placeholder="Buscar Flan" aria-label="Search"
+                    value="{{ request.GET.q }}">
+                <button class="btn  d-none d-lg-inline" type="submit">Buscar</button>
+                <button class="btn  d-inline d-lg-none" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+            <div class="dropdown">
+                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                    data-bs-auto-close="outside">
+                    {% if user.is_authenticated %}
+                    <span class="d-none d-lg-inline">Cerrar Sesión</span>
+                    <i class="bi bi-box-arrow-right d-inline d-lg-none"></i>
+                    {% else %}
+                    <span class="d-none d-lg-inline">Iniciar Sesión</span>
+                    <i class="bi bi-box-arrow-in-right d-inline d-lg-none"></i>
+                    {% endif %}
+                </button>
+                <div class="dropdown-menu dropdown-menu-end p-4 login" style="background-color: rgba(0, 0, 0, 0.6);">
+                    {% if not user.is_authenticated %}
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nombre de usuario</label>
+                            <input type="text" class="form-control" name="username" placeholder="Nombre de usuario"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" name="password" placeholder="Contraseña"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
+                                <label class="form-check-label" for="remember_me">Recuérdame</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn">Iniciar Sesión</button>
+                    </form>
+                    {% else %}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">Cerrar Sesión</button>
+                    </form>
+                    {% endif %}
                 </div>
             </div>
         </div>

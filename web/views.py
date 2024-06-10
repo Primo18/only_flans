@@ -3,6 +3,12 @@ from .models import Flan
 from .forms import ContactFormForm
 from unidecode import unidecode
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+
+
+class CustomLoginView(LoginView):
+    template_name = "web/login.html"
 
 
 def index(request):
@@ -14,10 +20,7 @@ def about(request):
     return render(request, "web/about.html")
 
 
-def contact(request):
-    return render(request, "web/contact.html")
-
-
+@login_required
 def welcome(request):
     flanes_privados = Flan.objects.filter(is_private=True)
     return render(request, "web/welcome.html", {"flanes": flanes_privados})
@@ -33,19 +36,14 @@ def toggle_privacy(request, slug):
     flan = get_object_or_404(Flan, slug=slug)
     flan.is_private = not flan.is_private
     flan.save()
-    return redirect(
-        "flan_detail", slug=flan.slug
-    )  # Redirecciona usando el nombre de la vista
+    return redirect("flan_detail", slug=flan.slug)
 
 
 @require_POST
 def buy_flan(request, slug):
-    # Lógica para comprar el flan (por ejemplo, agregar a un carrito de compras)
     flan = get_object_or_404(Flan, slug=slug)
     # Aquí puedes añadir la lógica para manejar la compra
-    return redirect(
-        "flan_detail", slug=flan.slug
-    )  # Redirecciona usando el nombre de la vista
+    return redirect("flan_detail", slug=flan.slug)
 
 
 def contact(request):
@@ -61,17 +59,6 @@ def contact(request):
 
 def contact_success(request):
     return render(request, "web/contact_success.html")
-
-
-def search(request):
-    query = request.GET.get("q", "")
-    if query:
-        flanes = Flan.objects.filter(name__icontains=query)
-    else:
-        flanes = Flan.objects.all()
-    return render(
-        request, "web/search_results.html", {"flanes": flanes, "query": query}
-    )
 
 
 def search(request):
