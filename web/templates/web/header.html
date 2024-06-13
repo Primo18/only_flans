@@ -87,6 +87,9 @@
                         </div>
                         <button type="submit" class="btn">Iniciar Sesión</button>
                     </form>
+                    <div class="text-center mt-2">
+                        <a href="{% url 'register' %}" class=" btn-link">Registro</a>
+                    </div>
                     {% else %}
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}

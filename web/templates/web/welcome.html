@@ -1,24 +1,11 @@
 {% extends 'web/base.html' %}
 
 {% block title %}Home - Only Flans{% endblock %}
-{% load static %}
 {% block content %}
 <h1>¡Bienvenido {{ user.get_username }}!</h1>
 <div class="row">
     {% for flan in flanes %}
-    <div class="col-md-4 mb-4">
-        <a href="{% url 'flan_detail' slug=flan.slug %}" class="text-decoration-none text-dark">
-            <div class="card h-100 shadow-lg card-hover card-semitransparent d-flex flex-column">
-                <div class="image-container">
-                    <img src="{% static flan.image_url %}" class="card-img-top img-fluid" alt="{{ flan.name }}">
-                </div>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ flan.name }}</h5>
-                    <p class="card-text">{{ flan.description }}</p>
-                </div>
-            </div>
-        </a>
-    </div>
+    {% include 'web/flan_card.html' %}
     {% endfor %}
 </div>
 {% endblock %}

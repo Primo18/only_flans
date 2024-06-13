@@ -13,6 +13,7 @@ from web.views import (
     contact_success,
     search,
     CustomLoginView,
+    register,
 )
 
 urlpatterns = [
@@ -27,6 +28,7 @@ urlpatterns = [
     path("flan/<slug:slug>/", flan_detail, name="flan_detail"),
     path("flan/<slug:slug>/toggle_privacy/", toggle_privacy, name="toggle_privacy"),
     path("flan/<slug:slug>/buy/", buy_flan, name="buy_flan"),
+    path("accounts/register/", register, name="register"),
     path("accounts/login/", CustomLoginView.as_view(), name="login"),
     path("accounts/logout/", LogoutView.as_view(next_page="/"), name="logout"),
     path("accounts/", include("django.contrib.auth.urls")),

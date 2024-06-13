@@ -5,10 +5,27 @@ from unidecode import unidecode
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import login
+from .forms import RegisterForm
+
+
+def register(request):
+    if request.user.is_authenticated:
+        return redirect("index")
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("index")
+    else:
+        form = RegisterForm()
+    return render(request, "web/register.html", {"form": form})
 
 
 class CustomLoginView(LoginView):
     template_name = "web/login.html"
+    redirect_authenticated_user = True
 
 
 def index(request):

@@ -11,6 +11,9 @@ class Flan(models.Model):
     image_url = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     is_private = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
         self.normalized_name = unidecode(self.name).lower()
