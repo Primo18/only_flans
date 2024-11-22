@@ -1,3 +1,4 @@
 only_flans/__pycache__/
 web/__pycache__/
 web/migrations/__pycache__/
+staticfiles/
