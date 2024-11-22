@@ -29,7 +29,8 @@ SECRET_KEY = "django-insecure-7=1#t$oo3%zucucu93yp4@$sz-*t6=s14u8jcdsjgl^)$teej6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["onlyflans-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://onlyflans-production.up.railway.app"]
 
 
 # Application definition
