@@ -33,7 +33,10 @@ ALLOWED_HOSTS = [
     "onlyflans-production.up.railway.app",
     "web-production-c1cd1.up.railway.app",
 ]
-CSRF_TRUSTED_ORIGINS = ["https://onlyflans-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://onlyflans-production.up.railway.app",
+    "https://web-production-c1cd1.up.railway.app",
+]
 
 
 # Application definition
