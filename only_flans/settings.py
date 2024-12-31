@@ -32,6 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "onlyflans-production.up.railway.app",
     "web-production-c1cd1.up.railway.app",
+    "only-flans.onrender.com",
 ]
 CSRF_TRUSTED_ORIGINS = [
     "https://onlyflans-production.up.railway.app",
